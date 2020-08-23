@@ -12,6 +12,8 @@ sense = SenseHat()
 red = (255, 0, 0)
 green = (0, 255, 0)
 yellow = (255,255,0)
+orange = (255,140,0)
+
 
 DEBUG = 0
 CMD_MODE = 2
@@ -120,24 +122,36 @@ if __name__ == "__main__":
     cmd_set_sleep(0)
     cmd_firmware_ver()
     cmd_set_working_period(PERIOD_CONTINUOUS)
-    cmd_set_mode(MODE_QUERY);
+    cmd_set_mode(MODE_QUERY)
     while True:
         cmd_set_sleep(0)
         for t in range(15):
-            values = cmd_query_data();
+            values = cmd_query_data()
             if values is not None and len(values) == 2:
               # print("PM2.5: ", values[0], ", PM10: ", values[1])
-	      pm=values[0]
-	      if pm < 40:
-    		bg = green
-	      if pm > 41 and pm < 100:
-    		bg = yellow
-	      if pm > 100:
-		bg = red
-	      message = str(int(values[0]))
-	      print (message)
-	      sense.show_message(message, scroll_speed=0.05, text_colour=bg)
-	      time.sleep(5)
+	            pm=values[0]
+            if pm < 12:
+                bg = green
+            if pm > 12 and pm < 35:
+                bg = yellow
+            if pm > 35 and pm < 55:
+                bg = orange
+            if pm > 55:
+                bg = red
+            pama = str(int(values[0]))
+            # Take readings from all three sensors
+            temp = sense.get_temperature()
+            pres = sense.get_pressure()
+            humi = sense.get_humidity()
+
+            # Round the values to one decimal place
+            temp = str(int(round(temp, 0)))
+            humi = str(int(round(humi, 0)))
+            pres = str(int(round(pres, 0)))
+
+            print ("Time: " + str(time.strftime("%d.%m.%Y %H:%M:%S")) + "  pm2.5: " + pama + "  Temperature: " + temp + "  Pressure: " + pres + "  Humidity: " + humi)
+            sense.show_message(pama, scroll_speed=0.05, text_colour=bg)
+            time.sleep(5)
 
         # open stored data
         try:
@@ -151,7 +165,7 @@ if __name__ == "__main__":
             data.pop(0)
 
         # append new values
-        jsonrow = {'pm25': values[0], 'pm10': values[1], 'time': time.strftime("%d.%m.%Y %H:%M:%S")}
+        jsonrow = {'time': time.strftime("%d.%m.%Y %H:%M:%S"), 'pm25': values[0], 'pm10': values[1], 'temp': temp, 'pres': pres, 'humi': humi}
         data.append(jsonrow)
 
         # save it
