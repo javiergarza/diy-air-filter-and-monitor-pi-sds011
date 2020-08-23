@@ -126,29 +126,19 @@ if __name__ == "__main__":
         for t in range(15):
             values = cmd_query_data();
             if values is not None and len(values) == 2:
-                # print("PM2.5: ", values[0], ", PM10: ", values[1])
-	            pm=values[0]
-	            if pm < 40:
-    		        bg = green
-	            if pm > 41 and pm < 100:
-    		        bg = yellow
-	            if pm > 100:
-		            bg = red
-	            pama = str(int(values[0]))
+              # print("PM2.5: ", values[0], ", PM10: ", values[1])
+	      pm=values[0]
+	      if pm < 40:
+    		bg = green
+	      if pm > 41 and pm < 100:
+    		bg = yellow
+	      if pm > 100:
+		bg = red
+	      message = str(int(values[0]))
+	      print (message)
+	      sense.show_message(message, scroll_speed=0.05, text_colour=bg)
+	      time.sleep(5)
 
-                # Take readings from all three sensors
-                temp = sense.get_temperature()
-                pres = sense.get_pressure()
-                humi = sense.get_humidity()
-
-                # Round the values to one decimal place
-                temp = int(round(t, 0))
-                pres = int(round(p, 0))
-                humi = int(round(h, 0))
-
-	            print ("pm2.5: " + pama + " Temp: " + temp + " Air Pressure: " + pres + "Humidity" + humi)
-	            sense.show_message(pama, scroll_speed=0.05, text_colour=bg)
-	            time.sleep(5)
         # open stored data
         try:
             with open(JSON_FILE) as json_data:
@@ -161,7 +151,7 @@ if __name__ == "__main__":
             data.pop(0)
 
         # append new values
-        jsonrow = {'time': time.strftime("%d.%m.%Y %H:%M:%S"), 'pm25': values[0], 'pm10': values[1], 'temp': temp, 'humi': humi, 'pres': pres}
+        jsonrow = {'pm25': values[0], 'pm10': values[1], 'time': time.strftime("%d.%m.%Y %H:%M:%S")}
         data.append(jsonrow)
 
         # save it
