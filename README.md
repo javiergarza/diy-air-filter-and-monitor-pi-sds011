@@ -6,7 +6,7 @@ The idea came from a search I did in YouTube for "DIY Air Purifier". [Here is a 
 
 | <img src="files/DIY-air-purifier-ingredients.JPG" alt="Fan box and filter" width="400"/> | |
 |---|---|
-| <img src="files/DIY-air-purifier-front.JPG" alt="Front view of home made air purifier" width="200"/>  <img src="DIY-air-purifier-back.JPG" alt="Rear view of home made air purifier" width="200"/>  |
+| <img src="files/DIY-air-purifier-front.JPG" alt="Front view of home made air purifier" width="200"/>  <img src="files/DIY-air-purifier-back.JPG" alt="Rear view of home made air purifier" width="200"/>  |
 
 ## Materials
 * 20 inch square fan: bought it at Home Depot for $20. Here is a [similar model in Amazon](https://amzn.to/2COs5aW)
@@ -35,7 +35,7 @@ See this [short video showing how the measurements are displayed on the SenseHAT
 
 Modified [this code I found in GitHub that reads from SDS011](https://gist.github.com/kadamski/92653913a53baf9dd1a8) to print the measurements on the SenseHAT screen using color coding (the measurement prints green when air quality is good, yellow when moderate and red when elevated)
 
-The python script saves the measurements on a json file that is available on the Pi's Web server
+The [aqi.py](aqi.py] python script saves the measurements on a json file that is available on the Pi's Web server
 
 ## Review
 
