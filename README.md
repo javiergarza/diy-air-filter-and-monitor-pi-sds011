@@ -40,3 +40,9 @@ The [aqi.py](aqi.py) python script saves the measurements on a json file that is
 ## Review
 
 Simple solution to monitor Air Quality inside your home. Commercial products that provide similar functionality cost several hundred dollars, plus I prefer to keep my data locally instead on someone else's cloud.
+
+Update 13-SEP-2020: I have been using the filters for 3 weeks now to help with the bad air quality caused by the numerous woldfires in California and I can say the filters work pretty welll and they really lower the pm2.5 particle count. Depending on the room size they can lower the pm2.5 from 120 to under 10 within 35 minutes of use at the highest fan setting. Takes longer in larger rooms...
+
+Here is a picture of how the filter looks after 3 weeks of heavy use (~6-8h/day)
+
+<img src="files/20x20-air-filter-after-3-weeks.JPG" alt="Front view of home made air purifier" width="200"/> 
